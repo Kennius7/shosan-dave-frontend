@@ -20,9 +20,9 @@ const User = ({ userId }) => {
 
   return (
     <tr>
-        <td>{user.username}</td>
-        <td>{userRoleString}</td>
-        <td>
+        <td className="pl-2 h-[40px]">{user.username}</td>
+        <td className="h-[40px]">{userRoleString}</td>
+        <td className="flex justify-center items-center h-[40px]">
             <button onClick={handleEdit}>
                 <FontAwesomeIcon icon={faPenToSquare} />
             </button>

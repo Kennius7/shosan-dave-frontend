@@ -13,7 +13,7 @@ const Welcome = () => {
                 <p>{today}</p>
                 <h1 className="mb-[40px]">Welcome!</h1>
                 <p className="mb-[20px]">
-                    <Link to="/dash/notes">View Shosan notes</Link>
+                    <Link to="/dash/notes">View notes</Link>
                 </p>
                 <p>
                     <Link to="/dash/users">View User settings</Link>

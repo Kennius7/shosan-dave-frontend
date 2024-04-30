@@ -23,6 +23,10 @@ h1 {
   font-size: 40px;
 }
 
+h2 {
+  font-size: 30px;
+}
+
 .bg-style {
   position: relative;
   width: 100%;

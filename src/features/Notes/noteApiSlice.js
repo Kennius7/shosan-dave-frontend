@@ -2,7 +2,9 @@ import { createSelector, createEntityAdapter } from "@reduxjs/toolkit";
 import { apiSlice } from "../../app/api/apiSlice";
 
 
-const noteAdapter = createEntityAdapter({});
+const noteAdapter = createEntityAdapter({
+    sortComparer: (a, b) => (a.completed === b.completed) ? 0 : a.completed ? 1 : -1
+});
 const initialState = noteAdapter.getInitialState();
 
 export const noteApiSlice = apiSlice.injectEndpoints({
@@ -12,7 +14,6 @@ export const noteApiSlice = apiSlice.injectEndpoints({
             validateStatus: (response, result) => {
                 return response.status === 200 && !result.isError
             },
-            keepUnusedDataFor: 5,
             transformResponse: responseData => {
                 const loadedNotes = responseData.map(note => {
                     note.id = note._id;
@@ -29,11 +30,40 @@ export const noteApiSlice = apiSlice.injectEndpoints({
                     ]
                 } else return [{ type: "Note", id: "LIST" }]
             }
+        }),
+        addNewNote: builder.mutation({
+            query: initialNoteData => ({
+                url: "/notes",
+                method: "POST",
+                body: { ...initialNoteData }
+            }),
+            invalidatesTags: [{ type: "Note", id: "LIST" }]
+        }),
+        updateNote: builder.mutation({
+            query: initialNoteData => ({
+                url: "/notes",
+                method: "PATCH",
+                body: { ...initialNoteData }
+            }),
+            invalidatesTags: (result, error, arg) => [{ type: "Note", id: arg.id }]
+        }),
+        deleteNote: builder.mutation({
+            query: ({ id }) => ({
+                url: "/notes",
+                method: "DELETE",
+                body: { id }
+            }),
+            invalidatesTags: (result, error, arg) => [{ type: "Note", id: arg.id }]
         })
     })
 })
 
-export const { useGetNotesQuery } = noteApiSlice;
+export const { 
+    useGetNotesQuery,
+    useAddNewNoteMutation,
+    useUpdateNoteMutation,
+    useDeleteNoteMutation
+} = noteApiSlice;
 
 //* Returns the query result object
 export const selectNotesResult = noteApiSlice.endpoints.getNotes.select();
