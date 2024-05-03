@@ -102,21 +102,21 @@ const EditUserForm = ({ user }) => {
           onSubmit={e => e.preventDefault()} 
           className="w-[40%]">
 
-          <div className="flex flex-row justify-center items-center w-full mb-[40px]">
-            <h2 className="mr-[20px] text-start w-[95%]">Edit User</h2>
-            <div className="">
+          <div className="flex flex-row justify-center items-center w-full mb-[30px]">
+            <h2 className="mr-[20px] text-start w-[80%]">Edit User</h2>
+            <div className="flex flex-row justify-around items-center w-[20%]">
               <button 
                 title="Update" 
                 disabled={!canSave} 
                 onClick={onUpdateUserClicked}
                 className="">
-                <FontAwesomeIcon icon={faSave} size="3x" color={canSave ? "aqua" : "pink"} />
+                <FontAwesomeIcon icon={faSave} size="2x" color={canSave ? "aqua" : "pink"} />
               </button>
               <button 
                 title="Delete"
                 onClick={onDeleteUserClicked}
                 className="">
-                <FontAwesomeIcon icon={faTrashCan} size="3x" color={canSave ? "aqua" : "pink"} />
+                <FontAwesomeIcon icon={faTrashCan} size="2x" color={"red"} />
               </button>
             </div>
           </div>
@@ -159,8 +159,7 @@ const EditUserForm = ({ user }) => {
               type="checkbox"
               checked={active}
               onChange={onActiveChange}
-              className="w-full h-[40px] rounded-[6px] mb-[30px] outline-none text-slate-900
-              focus:bg-slate-100 bg-slate-300 pl-2" />
+              className="w-[25px] h-[25px]" />
           </div>
 
           <div className="flex flex-col justify-center items-start">
